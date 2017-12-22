@@ -25,8 +25,38 @@
     </style>
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
-	<script type="text/javascript">
+<script type="text/javascript">
 
+function searchExpressBus () {
+	
+	var xhr = new XMLHttpRequest();
+	var url = "https://api.odsay.com/api/searchBusLane?busNo=10&CID=1000&apiKey=2j66n0rdhZW8VITP11Bwhw";
+	xhr.open("GET", url, true);
+	xhr.send();
+	xhr.onreadystatechange = function() {
+
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			console.log( xhr.responseText ); // <- xhr.responseText 로 결과를 가져올 수 있음
+		}
+	}
+}
+
+
+
+
+	$( function(){
+		
+		$( "button.btn.btn-primary" ).bind("click", function(){
+//			$('form').attr("method", "POST").attr("action", "/product/updateProduct").attr("enctype", "multipart/form-data").submit();
+			searchExpressBus();
+			
+			$.ajax ({
+				
+			})
+
+
+			});
+		});
 
 
 </script>
@@ -41,6 +71,14 @@
 
 
 		<form class="form-horizontal">
+
+			<div class="form-group">
+				<label for="language"
+					class="col-sm-offset-1 col-sm-3 control-label">언어선택 (국문 : 0 , 영문 : 1)</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="language" name="language" placeholder="언어선택">
+				</div>
+			</div>
 
 			<div class="form-group">
 				<label for="startStation"
@@ -72,3 +110,5 @@
 
 </body>
 </html>
+
+
