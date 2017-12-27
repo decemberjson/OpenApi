@@ -4,15 +4,14 @@ package tour.service.domain;
 import java.util.Map;
 
 
-public class TourTripInfoTest {
+public class TourTripInfoTest_sh {
 	
 	/// Field
-	
-	private Map<String, Object> response;
-	private Map<String, Object> header;
-	private Map<String, Object> body;
+	// header value
 	private String resultCode;
 	private String resultMsg;
+	
+	// body value
 	private String addr1;
 	private String addr2;
 	private int areacode;
@@ -34,47 +33,18 @@ public class TourTripInfoTest {
 	private int totalCount;
 	
 	/// Constructor
-	public TourTripInfoTest() {
+	public TourTripInfoTest_sh() {
 		
 	}
-	
-
-	public Map<String, Object> getResponse() {
-		return response;
-	}
-
-	public void setResponse(Map<String, Object> response) {
-		this.response = response;
-	}
-	//
-	public Map<String, Object> getHeader() {
-		return header;
-	}
-
-
-	public void setHeader(Map<String, Object> header) {
-		this.header = header;
-	}
-
-
-	public Map<String, Object> getBody() {
-		return body;
-	}
-
-
-	public void setBody(Map<String, Object> body) {
-		this.body = body;
-	}
-
 
 	public String getResultCode() {
 		return resultCode;
 	}
 
 	public void setResultCode(String resultCode) {
-		this.resultCode = (String) response.get(resultCode);
+		this.resultCode = resultCode;
 	}
-	
+
 	public String getResultMsg() {
 		return resultMsg;
 	}
@@ -235,16 +205,18 @@ public class TourTripInfoTest {
 		this.totalCount = totalCount;
 	}
 
-
-
-
-
+	@Override
+	public String toString() {
+		return "TourTripInfoTest [resultCode=" + resultCode + ", resultMsg=" + resultMsg + ", addr1=" + addr1
+				+ ", addr2=" + addr2 + ", areacode=" + areacode + ", cat1=" + cat1 + ", cat2=" + cat2 + ", cat3=" + cat3
+				+ ", contentid=" + contentid + ", contenttypeid=" + contenttypeid + ", firstimage=" + firstimage
+				+ ", firstimage2=" + firstimage2 + ", mapx=" + mapx + ", mapy=" + mapy + ", mlevel=" + mlevel
+				+ ", overview=" + overview + ", sigungucode=" + sigungucode + ", zipcode=" + zipcode + ", numOfRows="
+				+ numOfRows + ", pageNo=" + pageNo + ", totalCount=" + totalCount + "]";
+	}
 	
 	
-	
-	
-	
-	
+		
 	
 
 }

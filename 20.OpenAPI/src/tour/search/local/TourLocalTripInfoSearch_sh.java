@@ -7,7 +7,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class TourLocalTripInfoSearch {
+/*
+TourAPI 사이트에서 제공하는 샘플 예제
+실행시 콘솔창에서 JSON DATA 확인
+*/
+
+public class TourLocalTripInfoSearch_sh {
 
 	 public static void main(String[] args) throws IOException {
 	        StringBuilder urlBuilder = new StringBuilder("http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon"); /*URL*/
