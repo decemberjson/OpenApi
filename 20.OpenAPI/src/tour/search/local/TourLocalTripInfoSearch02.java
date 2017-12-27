@@ -1,61 +1,153 @@
 package tour.search.local;
 
 import java.io.BufferedReader;
-import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
+import java.util.Map;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+
+import tour.service.domain.TourTripInfoTest;
+
 
 public class TourLocalTripInfoSearch02 {
 
-	 public static void main(String[] args) throws IOException {
-	        StringBuilder urlBuilder = new StringBuilder("http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon"); /*URL*/
-	        String serviceKey = "ay3zIymuP5LX%2BGZhKC44TDdl68jrGAk5sMJ2Ry5GkBV0TvUP14kU13EG1mkNneM4GQOTPDsVuj2%2BCKLpcwcvfg%3D%3D";
+	 public static void main(String[] args) throws Exception {
+		 
+		// JsonSimple 
+//		 TourLocalTripInfoSearch02.getTourTest_JsonSimple(); 
+		 
+		// Codehaus
+		TourLocalTripInfoSearch02.getTourTest_Codehaus();
+	 }
+	 
+		// JsonSimple 
+		public static void getTourTest_JsonSimple() throws Exception {
+
+			// HttpClient : Http Protocol 의 client 추상화
+			HttpClient httpClient = new DefaultHttpClient();
+
+			String url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon"; /*URL*/
+	        String myKey = "ay3zIymuP5LX%2BGZhKC44TDdl68jrGAk5sMJ2Ry5GkBV0TvUP14kU13EG1mkNneM4GQOTPDsVuj2%2BCKLpcwcvfg%3D%3D";
 	        
-	        urlBuilder.append("?" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + serviceKey); 									 /*Service Key*/
-	        urlBuilder.append("&" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + URLEncoder.encode("SERVICE_KEY", "UTF-8")); 	 /*�꽌鍮꾩뒪�씤利�*/
-	        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("10", "UTF-8"));				 /*�븳 �럹�씠吏� 寃곌낵 �닔*/
-	        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));				     /*�쁽�옱 �럹�씠吏� 踰덊샇*/
-	        urlBuilder.append("&" + URLEncoder.encode("MobileOS","UTF-8") + "=" + URLEncoder.encode("ETC", "UTF-8")); 				 /*IOS(�븘�씠�룿),AND(�븞�뱶濡쒖씠�뱶),WIN(�썝�룄�슦�룿),ETC*/
-	        urlBuilder.append("&" + URLEncoder.encode("MobileApp","UTF-8") + "=" + URLEncoder.encode("AppTest", "UTF-8"));			 /*�꽌鍮꾩뒪紐�=�뼱�뵆紐�*/
-	        urlBuilder.append("&" + URLEncoder.encode("contentId","UTF-8") + "=" + URLEncoder.encode("126508", "UTF-8"));			 /*肄섑뀗痢� ID*/
-	        urlBuilder.append("&" + URLEncoder.encode("contentTypeId","UTF-8") + "=" + URLEncoder.encode("", "UTF-8")); 			 /*愿�愿묓��엯(愿�愿묒�, �닕諛� �벑) ID*/
-	        urlBuilder.append("&" + URLEncoder.encode("defaultYN","UTF-8") + "=" + URLEncoder.encode("", "UTF-8")); 				 /*湲곕낯�젙蹂� 議고쉶�뿬遺�*/
-	        urlBuilder.append("&" + URLEncoder.encode("firstImageYN","UTF-8") + "=" + URLEncoder.encode("Y", "UTF-8")); 			 /*�썝蹂�, �뜽�꽕�씪 ���몴�씠誘몄� 議고쉶�뿬遺�*/
-	        urlBuilder.append("&" + URLEncoder.encode("areacodeYN","UTF-8") + "=" + URLEncoder.encode("Y", "UTF-8"));				 /*吏��뿭肄붾뱶, �떆援곌뎄肄붾뱶 議고쉶�뿬遺�*/
-	        urlBuilder.append("&" + URLEncoder.encode("catcodeYN","UTF-8") + "=" + URLEncoder.encode("Y", "UTF-8"));				 /*�꽌鍮꾩뒪遺꾨쪟肄붾뱶(��,以�,�냼 肄붾뱶) 議고쉶�뿬遺�*/
-	        urlBuilder.append("&" + URLEncoder.encode("addrinfoYN","UTF-8") + "=" + URLEncoder.encode("Y", "UTF-8")); 				 /*二쇱냼, �긽�꽭二쇱냼 議고쉶�뿬遺�*/
-	        urlBuilder.append("&" + URLEncoder.encode("mapinfoYN","UTF-8") + "=" + URLEncoder.encode("Y", "UTF-8")); 				 /*醫뚰몴 X,Y 議고쉶�뿬遺�*/
-	        urlBuilder.append("&" + URLEncoder.encode("overviewYN","UTF-8") + "=" + URLEncoder.encode("Y", "UTF-8"));				 /*肄섑뀗痢� 媛쒖슂 議고쉶�뿬遺�*/
+	        // Essential                                                                        
+	        String serviceKey = "?ServiceKey=" + myKey;          /*서비스인증*/                                  
+	        String mobileOS = "&MobileOS=ETC";                   /*IOS(아이폰),AND(안드로이드),WIN(원도우폰),ETC*/      
+	        String mobileApp = "&MobileApp=AppTest";             /*서비스명=어플명*/                               
+	        String contentId = "&contentId=126508";              /*콘텐츠 ID*/                                 
 	        
-	        ObjectMapper objectMapper = new ObjectMapper();
+	        // Option`
+	        String numOfRows = "&numOfRows=10";                  /*한 페이지 결과 수*/ 
+	        String pageNo = "&pageNo=1";                         /*현재 페이지 번호*/  
+	        String contentTypeId = "&contentTypeId=";            /*관광타입(관광지, 숙박 등) ID*/          
+	        String defaultYN = "&defaultYN=";                    /*기본정보 조회여부*/                   
+	        String firstImageYN = "&firstImageYN=Y";             /*원본, 썸네일 대표이미지 조회여부*/          
+	        String areacodeYN = "&areacodeYN=Y";                 /*지역코드, 시군구코드 조회여부*/            
+	        String catcodeYN = "&catcodeYN=Y";                   /*서비스분류코드(대,중,소 코드) 조회여부*/      
+	        String addrinfoYN = "&addrinfoYN=Y";                 /*주소, 상세주소 조회여부*/               
+	        String mapinfoYN = "&mapinfoYN=Y";                   /*좌표 X,Y 조회여부*/                 
+	        String overviewYN = "&overviewYN=Y";                 /*콘텐츠 개요 조회여부*/                 
 	        
-	        URL url = new URL(urlBuilder.toString());
-	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-	        conn.setRequestMethod("GET");
-	        conn.setRequestProperty("Accept", "application/json");
-	        conn.setRequestProperty("Content-type", "application/json;charset=UTF-8");
+	        HttpGet httpGet = new HttpGet(url + serviceKey + mobileOS + mobileApp + contentId + numOfRows
+	        		+ pageNo + contentTypeId + defaultYN + firstImageYN + areacodeYN 
+	        		+ catcodeYN + addrinfoYN + mapinfoYN + overviewYN);
+	        httpGet.setHeader("Accept", "application/json");
+			httpGet.setHeader("Content-Type", "application/json");
+
+			// HttpResponse : Http Protocol 응답 Message 추상화
+			HttpResponse httpResponse = httpClient.execute(httpGet);
+
+			// ==> Response 확인
+			System.out.println(httpResponse);
+			System.out.println();
+
+			// ==> Response 중 entity(DATA) 확인
+			HttpEntity httpEntity = httpResponse.getEntity();
+
+			// ==> InputStream 생성
+			InputStream is = httpEntity.getContent();
+			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+
+			System.out.println("[ Server 에서 받은 Data 확인 ] ");
+			String serverData = br.readLine();
+			System.out.println(serverData);
+
+			// ==> 내용읽기(JSON Value 확인)
+			JSONObject jsonobj = (JSONObject) JSONValue.parse(serverData);
+			System.out.println("[jsonobj 확인] : " + jsonobj);
+			
+			
+			
+			
+			TourTripInfoTest ttit = new TourTripInfoTest();
+			System.out.println(ttit.toString());
+			
+		}
+	 
+	 
+	 
+	 // Codehaus
+	 public static void getTourTest_Codehaus() throws Exception {
+		 
+		 HttpClient httpClient = new DefaultHttpClient();
+		 
+//	        StringBuilder urlBuilder = new StringBuilder("http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon"); /*URL*/
+	        String url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon"; /*URL*/
+	        String myKey = "ay3zIymuP5LX%2BGZhKC44TDdl68jrGAk5sMJ2Ry5GkBV0TvUP14kU13EG1mkNneM4GQOTPDsVuj2%2BCKLpcwcvfg%3D%3D";
 	        
-	        System.out.println("Response code: " + conn.getResponseCode());
+	        // Essential                                                                        
+	        String serviceKey = "?ServiceKey=" + myKey;          /*서비스인증*/                                  
+	        String mobileOS = "&MobileOS=ETC";                   /*IOS(아이폰),AND(안드로이드),WIN(원도우폰),ETC*/      
+	        String mobileApp = "&MobileApp=AppTest";             /*서비스명=어플명*/                               
+	        String contentId = "&contentId=126508";              /*콘텐츠 ID*/                                 
 	        
-	        BufferedReader br;
-	        if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
-	            br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-	        } else {
-	            br = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-	        }
+	        // Option`
+	        String numOfRows = "&numOfRows=10";                  /*한 페이지 결과 수*/ 
+	        String pageNo = "&pageNo=1";                         /*현재 페이지 번호*/  
+	        String contentTypeId = "&contentTypeId=";            /*관광타입(관광지, 숙박 등) ID*/          
+	        String defaultYN = "&defaultYN=";                    /*기본정보 조회여부*/                   
+	        String firstImageYN = "&firstImageYN=Y";             /*원본, 썸네일 대표이미지 조회여부*/          
+	        String areacodeYN = "&areacodeYN=Y";                 /*지역코드, 시군구코드 조회여부*/            
+	        String catcodeYN = "&catcodeYN=Y";                   /*서비스분류코드(대,중,소 코드) 조회여부*/      
+	        String addrinfoYN = "&addrinfoYN=Y";                 /*주소, 상세주소 조회여부*/               
+	        String mapinfoYN = "&mapinfoYN=Y";                   /*좌표 X,Y 조회여부*/                 
+	        String overviewYN = "&overviewYN=Y";                 /*콘텐츠 개요 조회여부*/                 
 	        
-	        StringBuilder sb = new StringBuilder();
-	        String line;
-	        while ((line = br.readLine()) != null) {
-	            sb.append(line);
-	        }
-	        br.close();
-	        conn.disconnect();
-	        System.out.println(sb.toString());
+	        HttpGet httpGet = new HttpGet(url + serviceKey + mobileOS + mobileApp + contentId + numOfRows
+	        		+ pageNo + contentTypeId + defaultYN + firstImageYN + areacodeYN 
+	        		+ catcodeYN + addrinfoYN + mapinfoYN + overviewYN);
+	        httpGet.setHeader("Accept", "application/json");
+			httpGet.setHeader("Content-Type", "application/json");
+	        
+			HttpResponse httpResponse = httpClient.execute(httpGet);
+			System.out.println(httpResponse);
+			System.out.println();
+			
+			HttpEntity httpEntity = httpResponse.getEntity();
+			
+			InputStream is = httpEntity.getContent();
+			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+			
+			JSONObject jsonobj = (JSONObject) JSONValue.parse(br);
+			System.out.println("[1]"+jsonobj);
+			System.out.println("===================================================");
+			
+			ObjectMapper objectMapper = new ObjectMapper();
+//			Map<String, Object> map = objectMapper.readValue(jsonobj.toString(), Map.class);
+//			System.out.println(map.get("response"));
+			TourTripInfoTest tourTripInfoTest = objectMapper.readValue(jsonobj.toString(), TourTripInfoTest.class);
+			System.out.println("[2]"+tourTripInfoTest.getResponse());
+			System.out.println("===================================================");
+			System.out.println("[3]"+tourTripInfoTest.getBody());
+			System.out.println("===================================================");
+			System.out.println("[4]"+tourTripInfoTest.getHeader());
 	    }
 	
 } // end of class
