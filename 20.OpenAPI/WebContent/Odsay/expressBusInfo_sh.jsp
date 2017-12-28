@@ -30,7 +30,7 @@
 function searchExpressBus () {
 	
 	var xhr = new XMLHttpRequest();
-	var url = "https://api.odsay.com/api/searchBusLane?busNo=10&CID=1000&apiKey=2j66n0rdhZW8VITP11Bwhw";
+	var url = "https://api.odsay.com/api/searchBusLane?busNo=10&CID=1000&apiKey=0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk";
 	xhr.open("GET", url, true);
 	xhr.send();
 	xhr.onreadystatechange = function() {

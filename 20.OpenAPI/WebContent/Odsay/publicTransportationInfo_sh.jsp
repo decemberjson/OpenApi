@@ -9,9 +9,12 @@
 </head>
 
 <div id="map" style="width:100%;height:400px;"></div>
-<!-- Naver Developers에서 발급받은 네이버지도 Application Key 입력  -->
 
+<!-- Naver Developers에서 발급받은 네이버지도 Application Key 입력 
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=ByxJShLyghWlQTAQc4ES&submodules=geocoder"></script>
+ -->
+<!-- Daum Developers에서 발급받은 다음지도 Application Key 입력  -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=68171e6db798333d82b92ae249926a4e"></script>
 
 <script>
  
@@ -22,15 +25,19 @@
 
 	var map = new naver.maps.Map('map', mapOptions);
 	
-	var sx = 126.93737555322481;
-	var sy = 37.55525165729346;
-	var ex = 126.88265238619182;
-	var ey = 37.481440035175375;
+	var sx = 126.93737555322481;		// 출발지 X좌표 (경도좌표)
+	var sy = 37.55525165729346;			// 출발지 Y좌표 (위도좌표)
+	var ex = 126.88265238619182;		// 도착지 X좌표 (경도좌표)
+	var ey = 37.481440035175375;		// 도착지 Y좌표 (위도좌표)
+	
+	var serviceKey = "0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk";
+	var optValue = 1;
+	var searchPathType = 2;
 	
 	function searchPubTransPathAJAX() {
 		var xhr = new XMLHttpRequest();
 		//ODsay apiKey 입력
-		var url = "https://api.odsay.com/api/searchPubTransPath?SX="+sx+"&SY="+sy+"&EX="+ex+"&EY="+ey+"&apiKey=2j66n0rdhZW8VITP11Bwhw";
+		var url = "https://api.odsay.com/api/searchPubTransPath?SX="+sx+"&SY="+sy+"&EX="+ex+"&EY="+ey+"&OPT="+optValue+"&SearchPathType"+searchPathType+"&apiKey=" + serviceKey;
 		xhr.open("GET", url, true);
 		xhr.send();
 		xhr.onreadystatechange = function() {
@@ -48,7 +55,7 @@
 	function callMapObjApiAJAX(mabObj){
 		var xhr = new XMLHttpRequest();
 		//ODsay apiKey 입력
-		var url = "https://api.odsay.com/api/loadLane?mapObject=0:0@"+mabObj+"&apiKey=2j66n0rdhZW8VITP11Bwhw";
+		var url = "https://api.odsay.com/api/loadLane?mapObject=0:0@"+mabObj+"&apiKey=0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk";
 		xhr.open("GET", url, true);
 		xhr.send();
 		xhr.onreadystatechange = function() {

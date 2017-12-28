@@ -26,10 +26,10 @@ public class TourLocalTripInfoSearch02_sh {
 	 public static void main(String[] args) throws Exception {
 		 
 		// JsonSimple 
-//		 TourLocalTripInfoSearch02.getTourTest_JsonSimple(); 
+		 TourLocalTripInfoSearch02_sh.getTourTest_JsonSimple(); 
 		 
 		// Codehaus
-		TourLocalTripInfoSearch02_sh.getTourTest_Codehaus();
+//		TourLocalTripInfoSearch02_sh.getTourTest_Codehaus();
 	 }
 	 
 		// JsonSimple 
@@ -42,22 +42,22 @@ public class TourLocalTripInfoSearch02_sh {
 	        String myKey = "ay3zIymuP5LX%2BGZhKC44TDdl68jrGAk5sMJ2Ry5GkBV0TvUP14kU13EG1mkNneM4GQOTPDsVuj2%2BCKLpcwcvfg%3D%3D";
 	        
 	        // Essential                                                                        
-	        String serviceKey = "?ServiceKey=" + myKey;          /*서비스인증*/                                  
-	        String mobileOS = "&MobileOS=ETC";                   /*IOS(아이폰),AND(안드로이드),WIN(원도우폰),ETC*/      
-	        String mobileApp = "&MobileApp=AppTest";             /*서비스명=어플명*/                               
-	        String contentId = "&contentId=126508";              /*콘텐츠 ID*/                                 
+	        String serviceKey = "?ServiceKey=" + myKey;          	/*서비스인증*/                                  
+	        String mobileOS = "&MobileOS=ETC";                   	/*IOS(아이폰),AND(안드로이드),WIN(원도우폰),ETC*/      
+	        String mobileApp = "&MobileApp=AppTest";             	/*서비스명=어플명*/                               
+	        String contentId = "&contentId=126508";              	/*콘텐츠 ID*/                                 
 	        
-	        // Option`
-	        String numOfRows = "&numOfRows=10";                  /*한 페이지 결과 수*/ 
-	        String pageNo = "&pageNo=1";                         /*현재 페이지 번호*/  
-	        String contentTypeId = "&contentTypeId=";            /*관광타입(관광지, 숙박 등) ID*/          
-	        String defaultYN = "&defaultYN=";                    /*기본정보 조회여부*/                   
-	        String firstImageYN = "&firstImageYN=Y";             /*원본, 썸네일 대표이미지 조회여부*/          
-	        String areacodeYN = "&areacodeYN=Y";                 /*지역코드, 시군구코드 조회여부*/            
-	        String catcodeYN = "&catcodeYN=Y";                   /*서비스분류코드(대,중,소 코드) 조회여부*/      
-	        String addrinfoYN = "&addrinfoYN=Y";                 /*주소, 상세주소 조회여부*/               
-	        String mapinfoYN = "&mapinfoYN=Y";                   /*좌표 X,Y 조회여부*/                 
-	        String overviewYN = "&overviewYN=Y";                 /*콘텐츠 개요 조회여부*/                 
+	        // Option
+	        String numOfRows = "&numOfRows=10";                  	/*한 페이지 결과 수*/ 
+	        String pageNo = "&pageNo=1";                         	/*현재 페이지 번호*/  
+	        String contentTypeId = "&contentTypeId=14";          	/*관광타입(관광지, 숙박 등) ID*/          
+	        String defaultYN = "&defaultYN=Y";                    	/*기본정보 조회여부*/                   
+	        String firstImageYN = "&firstImageYN=Y";             	/*원본, 썸네일 대표이미지 조회여부*/          
+	        String areacodeYN = "&areacodeYN=Y";                 	/*지역코드, 시군구코드 조회여부*/            
+	        String catcodeYN = "&catcodeYN=Y";                   	/*서비스분류코드(대,중,소 코드) 조회여부*/      
+	        String addrinfoYN = "&addrinfoYN=Y";                 	/*주소, 상세주소 조회여부*/               
+	        String mapinfoYN = "&mapinfoYN=Y";                   	/*좌표 X,Y 조회여부*/                 
+	        String overviewYN = "&overviewYN=Y";                 	/*콘텐츠 개요 조회여부*/                 
 	        
 	        HttpGet httpGet = new HttpGet(url + serviceKey + mobileOS + mobileApp + contentId + numOfRows
 	        		+ pageNo + contentTypeId + defaultYN + firstImageYN + areacodeYN 
@@ -85,6 +85,7 @@ public class TourLocalTripInfoSearch02_sh {
 
 			// ==> 내용읽기(JSON Value 확인)
 			JSONObject jsonobj = (JSONObject) JSONValue.parse(serverData);
+			System.out.println("===================================================");
 			System.out.println("[jsonobj 확인] : " + jsonobj);
 			
 		}
@@ -159,6 +160,8 @@ public class TourLocalTripInfoSearch02_sh {
 
 		System.out.println("===================================================");
 		System.out.println(tourTripInfoTest);
+		System.out.println("===================================================");
+		System.out.println(tourTripInfoTest.getAddr2());
 		
 	}
 

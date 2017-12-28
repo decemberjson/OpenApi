@@ -18,10 +18,12 @@
 </style>
 <script>
 
+<!-- Odsay 제공 샘플예제 -->
+
 function searchBusLaneAJAX() {
 	var busNo = document.getElementById('busNo').value;
 	var xhr = new XMLHttpRequest();
-	var url = "https://api.odsay.com/api/searchBusLane?apiKey=2j66n0rdhZW8VITP11Bwhw&busNo=" + busNo;
+	var url = "https://api.odsay.com/api/searchBusLane?apiKey=0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk&busNo=" + busNo;
 	xhr.open("GET", url, true);
 	xhr.send();
 	xhr.onreadystatechange = function() {
