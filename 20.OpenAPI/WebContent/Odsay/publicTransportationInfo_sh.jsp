@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,7 +7,7 @@
 <title>길찾기 결과 지도에 표출하기</title>
 </head>
 
-<div id="map" style="width:100%;height:400px;"></div>
+<div id="map" style="width: 100%; height: 400px;"></div>
 
 <!-- Naver Developers에서 발급받은 네이버지도 Application Key 입력 
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=ByxJShLyghWlQTAQc4ES&submodules=geocoder"></script>
