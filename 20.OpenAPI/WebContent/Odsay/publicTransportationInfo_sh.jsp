@@ -9,9 +9,6 @@
 
 <div id="map" style="width: 100%; height: 400px;"></div>
 
-<!-- Naver Developers에서 발급받은 네이버지도 Application Key 입력 
-<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=ByxJShLyghWlQTAQc4ES&submodules=geocoder"></script>
- -->
 <!-- Daum Developers에서 발급받은 다음지도 Application Key 입력  -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=68171e6db798333d82b92ae249926a4e"></script>
 
