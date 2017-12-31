@@ -1,11 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<title>ODsay LAB</title>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+
+<head>
 <meta charset="EUC-KR">
+
+<title>ExpressBus Infomation</title>
 	
 	<!-- 참조 : http://getbootstrap.com/css/   참조 -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,38 +29,22 @@
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 
-function searchExpressBus () {
-	
-	var xhr = new XMLHttpRequest();
-	var url = "https://api.odsay.com/api/searchBusLane?busNo=10&CID=1000&apiKey=0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk";
-	xhr.open("GET", url, true);
-	xhr.send();
-	xhr.onreadystatechange = function() {
+	function fncGetExpressBusInfo() {
 
-		if (xhr.readyState == 4 && xhr.status == 200) {
-			console.log( xhr.responseText ); // <- xhr.responseText 로 결과를 가져올 수 있음
-		}
-	}
-}
-
-
-
-
-	$( function(){
+		var language = $("input[name='language']").val();
+		var detail = $("input[name='prodDetail']").val();
+		var manuDate = $("input[name='manuDate']").val();
 		
-		$( "button.btn.btn-primary" ).bind("click", function(){
-//			$('form').attr("method", "POST").attr("action", "/product/updateProduct").attr("enctype", "multipart/form-data").submit();
-			searchExpressBus();
-			
-			$.ajax ({
-				
-			})
-
-
-			});
+	});
+	
+	//=================== "등록" Event 연결 =================== 
+	$(function() {
+		$("button.btn.btn-primary").bind("click", function() {
+			fncGetExpressBusInfo();
 		});
-
-
+	});
+	
+	
 </script>
 
 
@@ -84,8 +70,7 @@ function searchExpressBus () {
 				<label for="startStation"
 					class="col-sm-offset-1 col-sm-3 control-label">출발역ID</label>
 				<div class="col-sm-4">
-					<input type="text" class="form-control" id="beginStation"
-						name="beginStation" placeholder="출발역ID">
+					<input type="text" class="form-control" id="beginStation" name="beginStation" placeholder="출발역ID">
 				</div>
 			</div>
 
@@ -93,8 +78,7 @@ function searchExpressBus () {
 				<label for="finalStation"
 					class="col-sm-offset-1 col-sm-3 control-label">도착역ID</label>
 				<div class="col-sm-4">
-					<input type="text" class="form-control" id="finalStation"
-						name="endStation" placeholder="도착역ID">
+					<input type="text" class="form-control" id="finalStation" name="endStation" placeholder="도착역ID">
 				</div>
 			</div>
 
@@ -111,4 +95,34 @@ function searchExpressBus () {
 </body>
 </html>
 
+
+
+function fncGetExpressBusInfo() {
+
+		var xhr = new XMLHttpRequest();
+		var url = "https://api.odsay.com/api/searchBusLane?busNo=10&CID=1000&apiKey=0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk";
+		xhr.open("GET", url, true);
+		xhr.send();
+		xhr.onreadystatechange = function() {
+
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				console.log(xhr.responseText); // <- xhr.responseText 로 결과를 가져올 수 있음
+			}
+		}
+		$('form').attr("method", "POST").attr("action",
+				"/product/updateProduct")
+				.attr("enctype", "multipart/form-data").submit();
+	}
+
+	$(function() {
+
+		$("button.btn.btn-primary").bind("click", function() {
+			searchExpressBus();
+
+			$.ajax({
+
+			})
+
+		});
+	});
 

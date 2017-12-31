@@ -3,6 +3,7 @@ package odsay.search.terminal.bus.express;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URLEncoder;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -41,14 +42,14 @@ public class ExpressBusTerminalInfoSearch01_sh {
 
 			// Essential                                    
 			int languageType = 0;                   	 
-//			int CID = 0;                 
-			String terminalName = "동서울";                  
+			int CID = 1000;                 
+			String terminalName = "동서울";
+			
 			String serverApiKey = "NGWqA2+Br3ddBK6GFTsvMdNW3uJ+tGTyJZxuXA4AD5g";
-			String urlApiKey = "2j66n0rdhZW8VITP11Bwhw";
+			String encodeServerApiKey = URLEncoder.encode(serverApiKey);
+			System.out.println("[서버키 인코딩 확인] ==>" + encodeServerApiKey);
 
-//			String url = "https://api.odsay.com/api/expressBusTerminals?lang="+ languageType +"&CID=" + CID +"&terminalName=" + terminalName; /*URL*/
-//			String url = "https://api.odsay.com/api/expressBusTerminals?apiKey=" + urlApiKey + "&lang="+ languageType + "&terminalName=" + terminalName; /*URL*/
-			String url = "https://api.odsay.com/api/expressBusTerminals?apiKey=NGWqA2+Br3ddBK6GFTsvMdNW3uJ+tGTyJZxuXA4AD5g&lang=0&terminalName=남부"; /*URL*/
+			String url = "https://api.odsay.com/api/expressBusTerminals?apiKey=" + encodeServerApiKey + "&lang="+ languageType + "&terminalName=" + terminalName; /*URL*/
 			
 			System.out.println("[url 확인] :: " + url );
 	        

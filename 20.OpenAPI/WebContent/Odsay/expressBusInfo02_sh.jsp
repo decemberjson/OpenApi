@@ -24,7 +24,7 @@ function searchBusLaneAJAX() {
 	var busNo = document.getElementById('busNo').value;
 	var xhr = new XMLHttpRequest();
 	var url = "https://api.odsay.com/api/searchBusLane?apiKey=0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk&busNo=" + busNo;
-//	var url = "https://api.odsay.com/api/searchBusLane?apiKey=NGWqA2+Br3ddBK6GFTsvMdNW3uJ+tGTyJZxuXA4AD5g&busNo=" + busNo;
+//	var url = "https://api.odsay.com/api/searchBusLane?apiKey=NGWqA2%2BBr3ddBK6GFTsvMdNW3uJ%2BtGTyJZxuXA4AD5g&busNo=" + busNo;
 	xhr.open("GET", url, true);
 	xhr.send();
 	xhr.onreadystatechange = function() {
