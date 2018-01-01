@@ -21,15 +21,15 @@ MiniProject 08.Model2MVCShop(Rest Client) 와 동일하게 수정
 */
 
 
-public class TourLocalTripInfoSearch02_sh {
+public class RestClientTourLocalTripInfoSearch02_sh {
 
 	 public static void main(String[] args) throws Exception {
 		 
 		// JsonSimple 
-		 TourLocalTripInfoSearch02_sh.getTourTest_JsonSimple(); 
+//		 RestClientTourLocalTripInfoSearch02_sh.getTourTest_JsonSimple(); 
 		 
 		// Codehaus
-//		TourLocalTripInfoSearch02_sh.getTourTest_Codehaus();
+		RestClientTourLocalTripInfoSearch02_sh.getTourTest_Codehaus();
 	 }
 	 
 		// JsonSimple 

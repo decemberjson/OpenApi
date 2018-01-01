@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import odsay.service.domain.ExpressBusTerminal_sh;
-
-@Controller
+import odsay.service.domain.ExpressBusTerminalResult_sh;
+/*
+//@Controller
 @RequestMapping("/ExpressBus/*")
 public class ExpressBusTerminalController {
 
@@ -29,7 +29,7 @@ public class ExpressBusTerminalController {
 	
 	@RequestMapping( value="getTerminalInfo", method=RequestMethod.POST)
 	public String getTerminalInfo( 
-			@ModelAttribute("ExpressBusTerminal_sh") ExpressBusTerminal_sh expressBusTerminal 
+			@ModelAttribute("ExpressBusTerminal_sh") ExpressBusTerminalDeparture_sh expressBusTerminal 
 			) throws Exception {
 		
 		System.out.println("/ExpressBus/getTerminalInfo : POST");
@@ -45,7 +45,7 @@ public class ExpressBusTerminalController {
 		
 		// Essential Parameter Value
 		String apiKey = "?apiKey=" + yuriApiKey;											//내가 받은 apiKey
-		String langVal = "&lang=" + expressBusTerminal.getLanguage();							//언어선택
+		String langVal = "&lang=" + expressBusTerminal.getLanguage();						//언어선택
 		String terminalNameVal = "&terminalName=" + expressBusTerminal.getTerminalName();	//터미널명
 		
 		HttpGet httpGet = new HttpGet(url + apiKey + langVal + terminalNameVal);
@@ -77,5 +77,5 @@ public class ExpressBusTerminalController {
 		
 		return "forward:/Odsay/getExpressBusTerminal_sh.jsp";
 	}
-	
 } // end of Class
+	//*/

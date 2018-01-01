@@ -32,7 +32,7 @@ body>div.container {
 	function fncGetExpressBusInfo() {
 
 //		var danielKey = "NGWqA2%2BBr3ddBK6GFTsvMdNW3uJ%2BtGTyJZxuXA4AD5g";
-		var yuriKey = "0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk";
+//		var yuriKey = "0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk";
 
 		var language = $("input[name='language']").val();
 		var terminalName = $("input[name='terminalName']").val();
