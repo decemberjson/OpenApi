@@ -34,8 +34,8 @@ body>div.container {
 //		var danielKey = "NGWqA2%2BBr3ddBK6GFTsvMdNW3uJ%2BtGTyJZxuXA4AD5g";
 //		var yuriKey = "0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk";
 
-		var language = $("input[name='language']").val();
-		var terminalName = $("input[name='terminalName']").val();
+//		var language = $("input[name='language']").val();
+//		var terminalName = $("input[name='terminalName']").val();
 		
 		if (terminalName == null || terminalName.length < 1) {
 			alert("터미널명은 반드시 입력하여야 합니다.");
@@ -51,6 +51,8 @@ body>div.container {
 	$(function() {
 		$("button.btn.btn-primary").bind("click", function() {
 			fncGetExpressBusInfo();
+			alert($("#language").val())
+			alert($("#terminalName").val())
 		});
 	});
 	
@@ -74,8 +76,9 @@ body>div.container {
 			<div class="form-group">
 				<label for="language" class="col-sm-offset-1 col-sm-3 control-label">언어선택</label>
 				<div class="col-sm-4">
-					<input type="radio" id="language" name="language" value="0" checked> 한국어&nbsp;&nbsp;&nbsp;
- 					<input type="radio" id="language" name="language" value="1"> English
+					<div class="radio">
+						<input type="radio" id="language" name="option1" value="0" checked> 한국어
+					</div>
 				</div>
 			</div>
 

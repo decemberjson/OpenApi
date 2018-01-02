@@ -99,6 +99,7 @@ public class RestClientExpressBusTerminal_sh {
 		int languageType = 0;
 		int CID = 1000;
 		String terminalName = "동서울";
+//		String terminalName = "고속";
 
 		String danielApiKey = "NGWqA2+Br3ddBK6GFTsvMdNW3uJ+tGTyJZxuXA4AD5g";
 		String yuriApiKey = "0ObaGjz7q8kLrzbsVutNT0qpRKpduNy7cnS9HDogmsk";
@@ -106,8 +107,9 @@ public class RestClientExpressBusTerminal_sh {
 		String encodeServerApiKey = URLEncoder.encode(danielApiKey);
 		System.out.println("[서버키 인코딩 확인] ==>" + encodeServerApiKey);
 
+		// apiKey 확인
 		String url = "https://api.odsay.com/api/expressBusTerminals?apiKey=" 
-		+ encodeServerApiKey + "&lang=" + languageType
+		+ yuriApiKey + "&lang=" + languageType
 				+ "&terminalName=" + terminalName; /* URL */
 
 		System.out.println("[url 확인] :: " + url);
@@ -143,47 +145,25 @@ public class RestClientExpressBusTerminal_sh {
 		ObjectMapper resultMapper = new ObjectMapper();
 		ExpressBusTerminalResult_sh expressBusTerminalResult = new ExpressBusTerminalResult_sh();
 		expressBusTerminalResult = resultMapper.readValue(resultVal.toJSONString(), ExpressBusTerminalResult_sh.class);
+		System.out.println("[회원이 검색한 터미널 명] :: " + expressBusTerminalResult);
+		System.out.println("===================================================");
 
-		// Client가 검색한 검색값
+		// Client가 검색한 터미널명에 대한 도착 가능한 터미널리스트 
 		JSONArray destinationTerminalsArr = (JSONArray) resultVal.get("destinationTerminals");
 		System.out.println("[4 : destinationTerminalsArr] ==>" + destinationTerminalsArr); 
-		System.out.println("[4 : destinationTerminalsArr.size()] ==>" + destinationTerminalsArr.size()); 
-		System.out.println("===================================================");
-//		JSONObject destinationTerminalsVal = (JSONObject) destinationTerminalsArr.get(0);
-//		System.out.println("[5 : destinationTerminalsVal] ==>" + destinationTerminalsVal); 
+		System.out.println("[4 : 도착가능한 터미널 갯수] ==>" + destinationTerminalsArr.size()); 
 		System.out.println("===================================================");
 		
 		JSONObject destinationTerminalsVal = new JSONObject();
 		for (int i = 0; i < destinationTerminalsArr.size(); i++) {
 			destinationTerminalsVal = (JSONObject) destinationTerminalsArr.get(i);
-			System.out.println(destinationTerminalsVal);
-			/*
+			
 			ObjectMapper destinationsMapper = new ObjectMapper();
 			ExpressBusTerminalDestinations_sh expressBusTerminalDestinations = new ExpressBusTerminalDestinations_sh();
 			expressBusTerminalDestinations = destinationsMapper.readValue(destinationTerminalsVal.toJSONString(), ExpressBusTerminalDestinations_sh.class);
-			System.out.println("[Destinations Domain toString]"+expressBusTerminalDestinations);
-			//*/
+			System.out.println(expressBusTerminalDestinations);
 		}
-		
-
-		/*
-		System.out.println("==============================================[result]=====");
-		System.out.println(expressBusTerminalResult);
-		System.out.println("==============================================[ExpressBusTerminal Domain Value Check]=====");
-		System.out.println("[도착터미널 True/False]:"+expressBusTerminalResult.isHaveDestinationTerminals());
-		System.out.println("[터미널명]:"+expressBusTerminalResult.getStationName());
-		System.out.println("[터미널ID]:"+expressBusTerminalResult.getStationID());
-		System.out.println("[x좌표]:"+expressBusTerminalResult.getX());
-		System.out.println("[y좌표]:"+expressBusTerminalResult.getY());
-		
-		System.out.println();
-		System.out.println("[도착가능 터미널 리스트]");
-		for (Object destinationTerminal : destinationTerminals) {
-			System.out.println(destinationTerminal);
-		}
-		//*/
-		
-		
+		System.out.println("===================================================");
 
 	}
 

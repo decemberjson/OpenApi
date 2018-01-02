@@ -4,7 +4,6 @@ import java.util.List;
 
 public class ExpressBusTerminalResult_sh {
 	
-	private List<String> result;
 	private boolean haveDestinationTerminals;
 	private double x;
 	private double y;
@@ -18,15 +17,7 @@ public class ExpressBusTerminalResult_sh {
 		
 	}
 
-	/// Getter & Setter
-	public List<String> getResult() {
-		return result;
-	}
-
-	public void setResult(List<String> result) {
-		this.result = result;
-	}
-
+	
 	public boolean isHaveDestinationTerminals() {
 		return haveDestinationTerminals;
 	}
@@ -78,9 +69,8 @@ public class ExpressBusTerminalResult_sh {
 
 	@Override
 	public String toString() {
-		return "ExpressBusTerminal_sh [result=" + result + ", haveDestinationTerminals=" + haveDestinationTerminals
-				+ ", x=" + x + ", y=" + y + ", stationName=" + stationName + ", stationID=" + stationID
-				+ ", destinationTerminals=" + destinationTerminals + "]";
+		return "ExpressBusTerminal_sh [haveDestinationTerminals=" + haveDestinationTerminals
+				+ ", x=" + x + ", y=" + y + ", stationName=" + stationName + ", stationID=" + stationID + "]";
 	}
 
 	

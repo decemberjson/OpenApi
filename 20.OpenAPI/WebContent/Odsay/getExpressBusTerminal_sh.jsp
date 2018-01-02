@@ -40,8 +40,8 @@
 	    </div>
 	
 		<div class="row">
-	  		<div class="col-xs-4 col-md-2"><strong>result : 필수값(Y)</strong></div>
-			<div class="col-xs-8 col-md-4">${ purchase.purchaseProd.prodNo }</div>
+	  		<div class="col-xs-4 col-md-2"><strong>도착가능한 터미널명</strong></div>
+			<div class="col-xs-8 col-md-4">${ expressBusTerminalDestinations_sh.stationName }</div>
 		</div><hr/>
 		
 		<div class="row">
