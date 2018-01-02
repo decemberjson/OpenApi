@@ -1,4 +1,4 @@
-package naver.papago.smt;
+package naver.papago.nmt;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -13,24 +13,24 @@ import org.json.simple.JSONValue;
 
 import naver.papago.domain.PapagoTranslateResult_sh;
 
-public class PapagoSMTRestController_sh {
+public class PapagoNMTRestController_sh {
 
 		 public static void main(String[] args) throws Exception {
 			 
 			 PapagoTranslateResult_sh ptr = new PapagoTranslateResult_sh();
-			 PapagoSMTRestController_sh.getPapagoSMT_Codehaus(ptr.getTranslateSource());
+			 PapagoNMTRestController_sh.getPapagoNMT_Codehaus(ptr.getTranslateSource());
 		 }
 		 
 		// Codehaus
-		public static void getPapagoSMT_Codehaus(String translateSource) throws Exception {
+		public static void getPapagoNMT_Codehaus(String translateSource) throws Exception {
 
-			String clientId = "368Klf3of4me0Y_gKmWW";	//애플리케이션 클라이언트 아이디값";
-	        String clientSecret = "iVsRtMfdbD";			//애플리케이션 클라이언트 시크릿값";
+			String clientId = "sd2IqGRpbpwH2q_PLvQ0";	//애플리케이션 클라이언트 아이디값";
+	        String clientSecret = "VWufMF9XU9";			//애플리케이션 클라이언트 시크릿값";
 	        try {
 	        	String source = "en";
 	        	String target = "ko";
 	            String text = URLEncoder.encode(translateSource, "UTF-8");
-	            String apiURL = "https://openapi.naver.com/v1/language/translate";
+	            String apiURL = "https://openapi.naver.com/v1/papago/n2mt";
 	            URL url = new URL(apiURL);
 	            HttpURLConnection con = (HttpURLConnection)url.openConnection();
 	            con.setRequestMethod("POST");
@@ -54,6 +54,7 @@ public class PapagoSMTRestController_sh {
 	                JSONObject jsonObj = (JSONObject) JSONValue.parse(br);
 	                System.out.println("[jsonObj value] :: " + jsonObj);
 
+	                ///*
 	                JSONObject message = (JSONObject) jsonObj.get("message");
 	                System.out.println("[message value] :: " + message);
 	                
@@ -66,6 +67,7 @@ public class PapagoSMTRestController_sh {
 	                PapagoTranslateResult_sh ptlr = new PapagoTranslateResult_sh();
 	                ptlr = translatedTextValue.readValue(result.toJSONString(), PapagoTranslateResult_sh.class);
 	                System.out.println(ptlr);
+	                //*/
 	                /////////////////////////////////////////////////////////////////////////////////////////////
 	                
 	            } else {  // 에러 발생

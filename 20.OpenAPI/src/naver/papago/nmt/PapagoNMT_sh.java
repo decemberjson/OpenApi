@@ -1,4 +1,4 @@
-package naver.papago.smt;
+package naver.papago.nmt;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -7,23 +7,23 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-// 파파고 SMT 샘플예제
+// 파파고 NMT 샘플예제
 
-public class PapagoSMT_sh {
+public class PapagoNMT_sh {
 
 	 public static void main(String[] args) {
-	        String clientId = "368Klf3of4me0Y_gKmWW";	//애플리케이션 클라이언트 아이디값";
-	        String clientSecret = "iVsRtMfdbD";			//애플리케이션 클라이언트 시크릿값";
+	        String clientId = "sd2IqGRpbpwH2q_PLvQ0";	//애플리케이션 클라이언트 아이디값";
+	        String clientSecret = "VWufMF9XU9";			//애플리케이션 클라이언트 시크릿값";
 	        try {
-	            String text = URLEncoder.encode("One of my favorite city is Chicago.", "UTF-8");
-	            String apiURL = "https://openapi.naver.com/v1/language/translate";
+	        	String text = URLEncoder.encode("만나서 반갑습니다.", "UTF-8");
+	            String apiURL = "https://openapi.naver.com/v1/papago/n2mt";
 	            URL url = new URL(apiURL);
 	            HttpURLConnection con = (HttpURLConnection)url.openConnection();
 	            con.setRequestMethod("POST");
 	            con.setRequestProperty("X-Naver-Client-Id", clientId);
 	            con.setRequestProperty("X-Naver-Client-Secret", clientSecret);
 	            // post request
-	            String postParams = "source=en&target=ko&text=" + text;
+	            String postParams = "source=ko&target=en&text=" + text;
 	            con.setDoOutput(true);
 	            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
 	            wr.writeBytes(postParams);
